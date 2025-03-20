@@ -1,0 +1,8 @@
+# drawio tmp file
+.$*.drawio.bkp
+# libreoffice tmp file
+.~lock.*.*#
+
+*.bak
+
+*.svg

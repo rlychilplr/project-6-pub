@@ -1,0 +1,80 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Guest" as guest
+actor "User" as user
+actor "Administrator" as admin
+actor "Moderator" as mod
+
+rectangle "Forum System" {
+  ' Guest use cases
+  usecase "View Forums" as UC1
+  usecase "View Threads" as UC2
+  usecase "Register Account" as UC3
+  usecase "Login" as UC4
+  usecase "Search Forums" as UC5
+
+  ' User use cases
+  usecase "Create Thread" as UC6
+  usecase "Post Comment" as UC7
+  usecase "Edit Own Posts" as UC8
+  usecase "Delete Own Posts" as UC9
+  usecase "Update Profile" as UC10
+  usecase "Manage Profile Picture" as UC11
+  usecase "Use Markdown" as UC12
+
+  ' Moderator use cases
+  usecase "Moderate Posts" as UC13
+  usecase "Delete Posts" as UC14
+  usecase "Manage Users" as UC15
+  usecase "Ban Users" as UC16
+
+  ' Admin use cases
+  usecase "Create Forums" as UC17
+  usecase "Manage Forums" as UC18
+  usecase "Manage User Roles" as UC19
+  usecase "System Settings" as UC20
+}
+
+' Guest relationships
+guest --> UC1
+guest --> UC2
+guest --> UC3
+guest --> UC4
+guest --> UC5
+
+' User relationships
+user --> UC6
+user --> UC7
+user --> UC8
+user --> UC9
+user --> UC10
+user --> UC11
+user --> UC12
+
+' Moderator relationships
+mod --> UC13
+mod --> UC14
+mod --> UC15
+mod --> UC16
+
+' Admin relationships
+admin --> UC17
+admin --> UC18
+admin --> UC19
+admin --> UC20
+
+' Inheritance
+user --|> guest
+mod --|> user
+admin --|> mod
+
+' Include relationships
+UC6 ..> UC4 : <<include>>
+UC7 ..> UC4 : <<include>>
+UC8 ..> UC4 : <<include>>
+UC12 ..> UC6 : <<extends>>
+UC12 ..> UC7 : <<extends>>
+
+@enduml

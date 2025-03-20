@@ -1,0 +1,83 @@
+main {
+    width: 90vw;
+    min-width: 950px;
+    margin: 0 auto;
+    background-color: #242424;
+    color: #e3e3e3;
+}
+
+/* Forums table */
+.forums {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #2a2a2a;
+    border-radius: 0 0 0.25rem 0.25rem;
+}
+
+.forum-header {
+    background-color: #26445f;
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+}
+
+/* Table rows */
+.forums tbody tr:nth-child(even) {
+    background-color: #202020;
+}
+
+.forums tbody tr:hover {
+    background-color: #1d1d1d;
+}
+
+/* Table icons */
+.table-icon {
+    width: 40px;
+    height: 50px;
+    line-height: 50px;
+    text-indent: 0;
+    text-align: center;
+    font-size: 22px;
+    color: #89adcd;
+}
+
+/* Forum links */
+.forum-name {
+    padding-bottom: 3px;
+}
+
+.forum-name a {
+    color: #89adcd;
+    text-decoration: none;
+}
+
+.forum-name a:hover {
+    text-decoration: underline;
+}
+
+/* Latest post styles */
+.latest-post {
+    font-size: 0.9em;
+    width: 25%;
+}
+
+.latest-post a {
+    color: #89adcd;
+    text-decoration: none;
+}
+
+.latest-post a:hover {
+    text-decoration: underline;
+}
+
+.post-info {
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Statistics */
+.thread-count,
+.post-count {
+    text-align: center;
+    color: #e3e3e3;
+    width: fit-content;
+}

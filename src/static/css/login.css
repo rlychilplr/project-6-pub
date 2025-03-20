@@ -1,0 +1,131 @@
+.login-container {
+    max-width: 35vw;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* Card styles */
+.login-card {
+    background: #242424;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    color: #e7e7e7;
+}
+
+.login-header h3 {
+    margin: 0;
+    text-align: center;
+}
+
+.login-body {
+    padding: 20px;
+}
+
+/* Error messages */
+.error-messages {
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #ffebee;
+    border-radius: 4px;
+    color: #c62828;
+}
+
+.error-messages ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Form layout */
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #e7e7e7;
+}
+
+/* Input with icon */
+.input-with-icon {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: #89adcd;
+}
+
+/* Form inputs */
+.login-form input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px 8px 8px 35px;
+    background: #1c1c1c;
+    border: 1px solid #3f3f3f;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #dfdfdf;
+}
+
+.login-form input::placeholder {
+    color: #6c806a;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: white;
+}
+
+/* Remember me checkbox */
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto;
+    cursor: pointer;
+}
+
+.checkbox-label span {
+    color: #e7e7e7;
+}
+
+/* Submit button */
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background: #444;
+}
+
+.login-form button:active {
+    background: #222;
+}

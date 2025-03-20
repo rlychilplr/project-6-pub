@@ -1,0 +1,77 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+!define foreign_key(x) <i>x</i>
+
+hide methods
+hide stereotypes
+
+' User table
+table(User) {
+  primary_key(id_user) : INT
+  username : VARCHAR(50)
+  password : VARCHAR(97)
+  email : VARCHAR(100)
+  profile_picture : MEDIUMBLOB
+  profile_picture_type : VARCHAR(30)
+  creation_date : DATETIME
+  rank : ENUM('user', 'admin', 'moderator')
+  last_login : DATETIME
+  session_token : VARCHAR(255)
+  token_expires : DATETIME
+  is_banned : BOOLEAN
+  deleted_at : DATETIME
+}
+
+' Forum table
+table(Forum) {
+  primary_key(id_forum) : INT
+  title : VARCHAR(255)
+  description : TEXT
+  icon : VARCHAR(100)
+  created_at : DATETIME
+  updated_at : DATETIME
+  deleted_at : DATETIME
+}
+
+' Posts table
+table(Posts) {
+  primary_key(id_post) : INT
+  foreign_key(id_user) : INT
+  foreign_key(id_forum) : INT
+  title : VARCHAR(255)
+  body : TEXT
+  creation_date : DATETIME
+  edited_at : DATETIME
+  deleted_at : DATETIME
+}
+
+' Comments table
+table(Comments) {
+  primary_key(id_comment) : INT
+  foreign_key(id_post) : INT
+  foreign_key(id_user) : INT
+  body : TEXT
+  creation_date : DATETIME
+  edited_at : DATETIME
+  deleted_at : DATETIME
+}
+
+' UserSession table
+table(UserSession) {
+  primary_key(id_session) : INT
+  foreign_key(id_user) : INT
+  session_token : VARCHAR(255)
+  created_at : DATETIME
+  expires_at : DATETIME
+  last_activity : DATETIME
+}
+
+' Relationships
+User "1" -- "*" Posts : creates
+User "1" -- "*" Comments : writes
+User "1" -- "*" UserSession : has
+Forum "1" -- "*" Posts : contains
+Posts "1" -- "*" Comments : has
+
+@enduml

@@ -1,0 +1,99 @@
+/* Layout & Container Styles */
+main {
+    width: 90vw;
+    min-width: 950px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.forum-header {
+    padding: 20px;
+    margin-bottom: 20px;
+    /* Visual */
+    background-color: #26445f;
+    border-radius: 4px;
+}
+
+/* Typography */
+.forum-header h2 {
+    margin: 0;
+    color: #e3e3e3;
+}
+
+.forum-header p {
+    margin: 10px 0 0;
+    color: #a0a0a0;
+}
+
+/* Button styles */
+.new-thread-button {
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 16px;
+    /* Visual */
+    background-color: #449151;
+    border-radius: 4px;
+    /* Typography */
+    color: #e3e3e3;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #367940;
+}
+
+/* Table styles */
+.threads {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.threads th {
+    padding: 10px;
+    /* Visual */
+    background-color: #1d272f;
+    /* Typography */
+    text-align: left;
+    color: #89adcd;
+}
+
+.threads td {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+}
+
+/* Thread Elements */
+.thread-title a {
+    /* Typography */
+    color: #89adcd;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.thread-title a:hover {
+    text-decoration: underline;
+}
+
+.thread-author {
+    color: #a0a0a0;
+}
+
+.thread-stats {
+    text-align: center;
+    color: #a0a0a0;
+}
+
+.thread-last-post {
+    color: #a0a0a0;
+    font-size: 0.9em;
+}
+
+/* Empty state */
+.no-threads {
+    padding: 30px;
+    text-align: center;
+    color: #a0a0a0;
+}

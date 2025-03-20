@@ -1,0 +1,154 @@
+main {
+    width: 90vw;
+    min-width: 950px;
+    margin: 0 auto;
+    background-color: #242424;
+    color: #e3e3e3;
+}
+
+/* Foldable sections */
+.foldable {
+    width: 80vw;
+    margin: 10px auto;
+    border: 1px solid #e3e3e3;
+}
+
+.content {
+    display: none;
+    padding: 10px;
+}
+
+.title {
+    width: calc(80vw - 20px);
+    padding: 10px;
+    display: inline-block;
+    background-color: #26445f;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Form layout */
+/* form creation */
+.form-section {
+    width: 30vw;
+    min-width: 450px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-section input {
+    flex-grow: 1;
+}
+
+/* form deletion */
+.forums-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.forums-table th,
+.forums-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.forums-table th {
+    background-color: #26445f;
+}
+
+.forum-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-button {
+    padding: 5px 10px;
+    background-color: #af4c4c;
+    border: none;
+    border-radius: 4px;
+    color: #e3e3e3;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #943f3f;
+}
+
+/* user ranks */
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.users-table th,
+.users-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+}
+
+.users-table th {
+    background-color: #26445f;
+}
+
+.rank-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.rank-form select {
+    padding: 5px;
+    background-color: #1d272f;
+    border: 1px solid #444;
+    color: #e3e3e3;
+    border-radius: 4px;
+}
+
+.rank-form button {
+    padding: 5px 10px;
+    background-color: #449151;
+    border: none;
+    border-radius: 4px;
+    color: #e3e3e3;
+    cursor: pointer;
+}
+
+.rank-form button:hover {
+    background-color: #367940;
+}
+
+/* Delete user form */
+.delete-user-form .form-section {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.delete-user-form input {
+    padding: 5px;
+    background-color: #1d272f;
+    border: 1px solid #444;
+    color: #e3e3e3;
+    border-radius: 4px;
+}
+
+.message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.message.error {
+    background-color: #af4c4c;
+    color: #ffffff;
+}
+
+.message.success {
+    background-color: #449151;
+    color: #ffffff;
+}

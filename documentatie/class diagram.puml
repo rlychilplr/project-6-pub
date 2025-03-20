@@ -1,0 +1,298 @@
+@startuml
+
+' Layout hints
+skinparam linetype ortho
+skinparam nodesep 100
+skinparam ranksep 100
+
+' Controllers
+package "Controllers" {
+    together {
+        class CommentPageController {
+            -model: CommentModel
+            +execute(): void
+            -handleRequest(): void
+            -handleNewComment(): void
+            -handleEditComment(comment: array): void
+            -handleDeleteComment(comment: array): void
+        }
+
+        class ForumPageController {
+            -model: ForumModel
+            +execute(): void
+            -handleRequest(): void
+        }
+
+        class HomePageController {
+            -model: HomeModel
+            +execute(): void
+            -handleRequest(): void
+        }
+
+        class LoginPageController {
+            -model: LoginModel
+            -executed: bool
+            +execute(): void
+            -handleRequest(): void
+            -checkRememberCookie(): void
+            -handleLogin(): void
+        }
+    }
+
+    together {
+        class LogoutPageController {
+            +execute(): void
+        }
+
+        class PanelPageController {
+            -model: PanelModel
+            -executed: bool
+            +execute(): void
+            -handleRequest(): void
+            -handleForumCreation(): void
+        }
+
+        class RegisterPageController {
+            -model: RegisterModel
+            +execute(): void
+            -handleRequest(): void
+            -handleRegistration(): void
+        }
+
+        class SettingsController {
+            -model: SettingsModel
+            +execute(): void
+            -handleRequest(): void
+        }
+    }
+
+    together {
+        class ThreadPageController {
+            -model: ThreadModel
+            +execute(): void
+            -handleRequest(): void
+            -handleEditThread(thread: array): void
+            -handleDeleteThread(thread: array): void
+            -handleNewThread(forumId: int): void
+            -renderEditForm(thread: array, errors: array): void
+        }
+
+        class UsersController {
+            -model: UsersModel
+            +execute(): void
+            -handleRequest(): void
+        }
+
+        class TOSController {
+            +execute(): void
+            -handleRequest(): void
+        }
+
+        class RulesController {
+            +execute(): void
+            -handleRequest(): void
+        }
+
+        class PrivacyPolicyController {
+            +execute(): void
+            -handleRequest(): void
+        }
+    }
+}
+
+' Models
+package "Models" {
+    together {
+        class BaseORM {
+            #pdo: PDO
+            #table: string
+            #primaryKey: string
+            +save(data: array, id: int): int|string
+            #insert(data: array): string
+            #update(data: array, id: int): int
+            +delete(id: int): bool
+            +findById(id: int): array|bool
+            +findAll(): array
+        }
+
+        class BreadcrumbHelper {
+            -siteName: string
+            +getSiteName(): string
+            +getBreadcrumbs(route: string, params: array): ?array
+        }
+
+        class CommentModel {
+            -commentsORM: CommentsORM
+            +createComment(threadId: int, body: string): bool
+            +getComment(commentId: int): ?array
+            +updateComment(commentId: int, body: string): bool
+            +deleteComment(commentId: int): bool
+        }
+    }
+
+    together {
+        class ForumModel {
+            -forumORM: ForumORM
+            -postsORM: PostsORM
+            -userORM: UserORM
+            -commentsORM: CommentsORM
+            +getForum(forumId: int): ?array
+            +getThreads(forumId: int): ?array
+        }
+
+        class HomeModel {
+            -forumORM: ForumORM
+            -postsORM: PostsORM
+            -commentsORM: CommentsORM
+            -userORM: UserORM
+            +getForums(): ?array
+        }
+
+        class LoginModel {
+            -orm: UserORM
+            +validateLogin(username: string, password: string): array|bool
+            +createRememberToken(userId: int): ?string
+            +validateRememberToken(token: string): ?array
+            +clearRememberToken(userId: int): void
+        }
+    }
+
+    together {
+        class SettingsModel {
+            -userORM: UserORM
+            +updateProfilePicture(userId: int, imageData: string, mimeType: string): bool
+        }
+
+        class ThreadModel {
+            -forumORM: ForumORM
+            -postsORM: PostsORM
+            -commentsORM: CommentsORM
+            -userORM: UserORM
+            +getForum(forumId: int): ?array
+            +getThread(threadId: int): ?array
+            +getComments(threadId: int): ?array
+            +createThread(forumId: int, title: string, body: string): ?int
+            +updateThread(threadId: int, title: string, body: string): bool
+            +deleteThread(threadId: int): bool
+        }
+
+        class UsersModel {
+            -userORM: UserORM
+            +getAllUsers(): array
+        }
+    }
+
+    together {
+        class CommentsORM {
+            +findByPost(postId: int): array
+        }
+        class ForumORM
+        class PostsORM {
+            +findByForum(forumId: int): array
+        }
+        class UserORM {
+            +findByUsername(username: string): ?array
+        }
+    }
+}
+
+' Views
+package "Views" {
+    together {
+        class CommentView {
+            +renderEditForm(comment: array, errors: array): void
+        }
+
+        class ForumView {
+            +render(forum: array, threads: array): void
+        }
+
+        class HomeView {
+            +render(forums: array): void
+        }
+
+        class LoginView {
+            +render(errors: array): void
+        }
+    }
+
+    together {
+        class PanelView {
+            +render(errors: array): void
+        }
+
+        class RegisterView {
+            +render(errors: array): void
+        }
+
+        class SettingsView {
+            +render(errors: array): void
+        }
+
+        class ThreadView {
+            -parsedown: Parsedown
+            +render(thread: array, comments: array): void
+            +renderNewThreadForm(forum: array, errors: array): void
+            +renderEditForm(thread: array, errors: array): void
+        }
+    }
+
+    together {
+        class UsersView {
+            +render(users: array): void
+        }
+        class TOSView {
+            +render(): void
+        }
+        class RulesView {
+            +render(): void
+        }
+        class PrivacyPolicyView {
+            +render(): void
+        }
+    }
+}
+
+' Router and main relationships
+class Router {
+    -routes: array
+    -notfoundRouteFunc: callable
+    +addRoute(pattern: string, handler: string): void
+    +dispatch(requestedPath: string): void
+}
+
+' Inheritance relationships
+CommentsORM --|> BaseORM
+ForumORM --|> BaseORM
+PostsORM --|> BaseORM
+UserORM --|> BaseORM
+
+' Controller to Model relationships
+CommentPageController --> CommentModel
+ForumPageController --> ForumModel
+HomePageController --> HomeModel
+LoginPageController --> LoginModel
+PanelPageController --> PanelModel
+RegisterPageController --> RegisterModel
+SettingsController --> SettingsModel
+ThreadPageController --> ThreadModel
+UsersController --> UsersModel
+
+' Controller to View relationships
+CommentPageController --> CommentView
+ForumPageController --> ForumView
+HomePageController --> HomeView
+LoginPageController --> LoginView
+PanelPageController --> PanelView
+RegisterPageController --> RegisterView
+SettingsController --> SettingsView
+ThreadPageController --> ThreadView
+UsersController --> UsersView
+TOSController --> TOSView
+RulesController --> RulesView
+PrivacyPolicyController --> PrivacyPolicyView
+
+' Router relationship
+Router --> "*" Controllers : routes to
+
+@enduml

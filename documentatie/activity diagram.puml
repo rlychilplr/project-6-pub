@@ -1,0 +1,99 @@
+@startuml
+|User|
+start
+:Visit Registration Page;
+
+|System|
+:Display Registration Form;
+
+|User|
+:Fill Registration Details;
+:Submit Form;
+
+|System|
+if (Validate Input) then (valid)
+  :Create User Account;
+  :Send to Login Page;
+else (invalid)
+  :Display Error Messages;
+  :Return to Registration Form;
+  stop
+endif
+
+|User|
+:Login with Credentials;
+
+|System|
+if (Validate Credentials) then (yes)
+  :Create Session;
+  :Set Remember Token (if selected);
+  :Load User Profile;
+else (no)
+  :Display Login Error;
+  :Return to Login Form;
+  stop
+endif
+
+|User|
+split
+  :Navigate to Forum;
+  :Select Forum Category;
+  |System|
+  :Display Forum Threads;
+  |User|
+  :Create/View Threads;
+split again
+  :Access Profile Settings;
+  |System|
+  :Display Settings Page;
+  |User|
+  :Update Profile Picture;
+  |System|
+  if (Valid Image) then (yes)
+    :Save Profile Picture;
+  else (no)
+    :Show Error Message;
+  endif
+end split
+
+|User|
+:Interact with Thread;
+split
+  :Create New Thread;
+  |System|
+  if (Valid Content) then (yes)
+    :Save Thread;
+    :Update Forum View;
+  else (no)
+    :Show Error Message;
+  endif
+split again
+  :Post Comment;
+  |System|
+  if (Valid Comment) then (yes)
+    :Save Comment;
+    :Update Thread View;
+  else (no)
+    :Show Error Message;
+  endif
+split again
+  :Edit Own Content;
+  |System|
+  if (Authorized) then (yes)
+    :Update Content;
+  else (no)
+    :Show Permission Error;
+  endif
+end split
+
+|Admin|
+split
+  :Manage Forums;
+  :Create/Edit Forums;
+split again
+  :Manage Users;
+  :Update User Roles;
+end split
+
+stop
+@enduml

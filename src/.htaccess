@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteRule ^(.*)$ routing_entry.php [L]
+
+# increase max allowed files size to 16megabytes
+php_value upload_max_filesize 16M
+php_value post_max_size 16M
